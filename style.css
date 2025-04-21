@@ -12,7 +12,7 @@ html {
 body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
-    color: #333; /* Colore testo default per il main/footer */
+    color: #333;
     background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
@@ -20,154 +20,52 @@ body {
 }
 
 .container {
-    max-width: 1140px; /* Aumentato per layout più largo */
+    max-width: 1140px;
     margin: 0 auto;
     padding: 0 20px;
-    position: relative; /* Necessario per z-index figli */
-    z-index: 2; /* Porta il contenuto sopra lo sfondo animato */
+    width: 100%; /* Assicura che occupi lo spazio disponibile */
 }
 
-/* Hero Section con nuovo sfondo e layout */
+/* Hero Section - Contenitore Principale */
 .hero-section {
-    background-color: #001546; /* Nuovo colore di sfondo */
-    color: #f8f9fa; /* Testo chiaro su sfondo scuro */
-    padding: 40px 0;
-    position: relative; /* Necessario per contenere elementi assoluti (icone bg) */
-    overflow: hidden; /* Nasconde parti di icone/immagini che escono */
-    display: flex; /* Centra il container verticalmente se necessario */
-    align-items: center; /* Centra verticalmente .hero-split-container */
-    min-height: 70vh; /* Altezza minima per dare spazio */
+    position: relative; /* Contesto per posizionamento assoluto figli */
+    padding: 60px 0; /* Spazio verticale interno */
+    color: #f8f9fa; /* Testo chiaro di default */
+    min-height: 80vh; /* Altezza minima significativa */
+    display: flex; /* Per centrare .hero-content-container */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra orizzontalmente */
+    overflow: hidden; /* Nasconde parti eccedenti dello sfondo/icone */
+
+    /* === Sfondo Immagine Modena === */
+    background-image: url('https://raw.githubusercontent.com/masini-pro/portfolio/refs/heads/main/modena.webp');
+    background-color: #001546; /* Fallback color */
+    background-size: 200% auto; /* Immagine larga il doppio, altezza automatica */
+    background-position: 0% 50%; /* Parte da sinistra, centrata verticalmente */
+    background-repeat: no-repeat;
+    animation: panBackground 60s linear infinite alternate; /* Animazione pan */
 }
 
-/* Layout diviso dentro Hero */
-.hero-split-container {
-    display: flex;
-    align-items: center; /* Allinea verticalmente le due colonne */
-    gap: 40px; /* Spazio tra le due colonne */
-    width: 100%;
-}
-
-.hero-info {
-    flex: 1 1 50%; /* Occupa circa il 50% dello spazio */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra elementi info nella colonna */
-    text-align: center;
-    padding: 20px; /* Spazio interno */
-    z-index: 3; /* Assicura che sia sopra l'immagine se si sovrappongono */
-}
-
-.hero-image-container {
-    flex: 1 1 50%; /* Occupa circa il 50% dello spazio */
-    height: 60vh; /* Altezza definita per contenere l'immagine */
-    max-height: 500px; /* Limite altezza massima */
-    overflow: hidden; /* Cruciale per tagliare l'immagine */
-    position: relative; /* Per posizionare l'immagine */
-    border-radius: 10px; /* Bordo arrotondato (opzionale) */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Immagine Scorrevoole */
-.scrolling-image {
-    display: block;
-    height: 100%;
-    /* Larghezza molto maggiore del contenitore per permettere lo scroll */
-    width: auto;
-    min-width: 250%; /* Esempio: 2.5 volte la larghezza del contenitore */
-    position: absolute;
-    top: 0;
-    left: 0; /* Parte da sinistra */
-    object-fit: cover;
-    object-position: center center; /* Centra l'immagine verticalmente/orizzontalmente */
-    animation: scrollHorizontal 45s linear infinite alternate; /* Animazione */
-}
-
-@keyframes scrollHorizontal {
+/* Animazione per lo sfondo */
+@keyframes panBackground {
     0% {
-        transform: translateX(0%); /* Start position */
+        background-position: 0% 50%; /* Sinistra */
     }
     100% {
-        /* Sposta l'immagine a sinistra fino a mostrare l'altra estremità */
-        /* Il valore negativo dipende da quanto l'immagine è più larga del contenitore */
-        /* Esempio: se min-width è 250%, l'immagine è 150% più larga. Sposta di -150% */
-        /* Calcolo più preciso: translateX(calc(-1 * ( (immagine_width / container_width) - 1) * 100% )) */
-        /* Con min-width 250%, sposta di circa -60% della *sua* larghezza */
-         transform: translateX(calc(-100% + 100vw / 2 - 20px)); /* Tentativo di calcolo più preciso, potrebbe richiedere aggiustamenti */
-         /* Alternativa più semplice ma meno precisa: */
-         /* transform: translateX(-50%); */ /* Sposta del 50% della larghezza dell'immagine */
+        background-position: 100% 50%; /* Destra */
     }
 }
 
-
-/* Stili Info Utente */
-.profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 5px solid rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+/* Overlay Blu */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 21, 70, 0.75); /* Blu #001546 con 75% opacità */
+    z-index: 1; /* Sopra lo sfondo (z-index 0), sotto icone e contenuto */
 }
-
-.hero-text h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.8em;
-    margin-bottom: 8px;
-    font-weight: 700;
-    color: #FFF; /* Colore bianco per il titolo */
-}
-
-.hero-text h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.85); /* Leggermente trasparente */
-}
-
-.hero-text .intro {
-    font-size: 1.1em;
-    max-width: 500px;
-    margin: 0 auto 30px auto;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-/* Bottoni Link */
-.profile-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-}
-
-.link-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    color: #001546; /* Testo scuro */
-    background-color: rgba(255, 255, 255, 0.9); /* Sfondo bianco quasi opaco */
-    border: 1px solid transparent;
-    border-radius: 25px;
-    text-decoration: none;
-    font-size: 0.95em;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-}
-
-.link-button i {
-    margin-right: 8px;
-    font-size: 1.1em;
-}
-
-.link-button:hover {
-    background-color: #fff; /* Bianco pieno su hover */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 
 /* Icone Animate Sfondo */
 .background-icons {
@@ -177,18 +75,18 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 1; /* Sotto il contenuto ma sopra lo sfondo base */
-    pointer-events: none; /* Non interferisce con i click */
+    z-index: 2; /* Sopra l'overlay, sotto il contenuto */
+    pointer-events: none;
 }
 
 .background-icons i {
     position: absolute;
-    color: rgba(255, 255, 255, 0.06); /* Molto trasparenti! */
-    font-size: 40px; /* Dimensione base icone sfondo */
+    color: rgba(255, 255, 255, 0.1); /* Bianche, molto trasparenti */
+    font-size: 40px;
     animation: floatRotate 25s linear infinite alternate;
 }
 
-/* Posizionamento e Ritardi Animazione Icone Sfondo */
+/* Posizionamento e Ritardi Animazione Icone Sfondo (come prima) */
 .background-icons i:nth-child(1) { top: 10%; left: 15%; font-size: 50px; animation-delay: -2s; animation-duration: 28s;}
 .background-icons i:nth-child(2) { top: 20%; left: 80%; font-size: 30px; animation-delay: -5s; }
 .background-icons i:nth-child(3) { top: 70%; left: 10%; font-size: 60px; animation-delay: -8s; animation-duration: 22s;}
@@ -198,20 +96,91 @@ body {
 .background-icons i:nth-child(7) { top: 60%; left: 90%; font-size: 55px; animation-delay: -21s; animation-duration: 26s;}
 .background-icons i:nth-child(8) { top: 5%; left: 50%; font-size: 32px; animation-delay: -24s;}
 
-
+/* Animazione Icone (come prima) */
 @keyframes floatRotate {
-    0% {
-        transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.06;
-    }
-    50% {
-         transform: translateY(-15px) rotate(180deg) scale(1.1);
-         opacity: 0.03; /* Ancora più tenue a metà */
-    }
-    100% {
-        transform: translateY(0px) rotate(360deg) scale(1);
-        opacity: 0.06;
-    }
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.1; }
+    50% { transform: translateY(-15px) rotate(180deg) scale(1.1); opacity: 0.05; }
+    100% { transform: translateY(0px) rotate(360deg) scale(1); opacity: 0.1; }
+}
+
+/* Contenitore Contenuto Principale dell'Header */
+.hero-content-container {
+    position: relative; /* Necessario per z-index */
+    z-index: 3; /* Sopra overlay e icone animate */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Stili Foto Profilo, Testo e Link (simili a prima) */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hero-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #FFF;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* Leggera ombra per leggibilità */
+}
+
+.hero-text h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.hero-text .intro {
+    font-size: 1.15em;
+    max-width: 650px;
+    margin: 0 auto 35px auto;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 25px;
+    color: #001546;
+    background-color: rgba(255, 255, 255, 0.95); /* Sfondo bianco quasi opaco */
+    border: 1px solid transparent;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.link-button i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.link-button:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -220,97 +189,69 @@ body {
     flex-grow: 1;
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #f8f9fa; /* Sfondo chiaro per il contenuto principale */
+    background-color: #f8f9fa;
 }
 
-/* Footer */
+/* Footer (Stili simili a prima) */
 .footer {
-    background-color: #000d2e; /* Variazione più scura del blu */
+    background-color: #000d2e; /* Blu ancora più scuro */
     color: #ccc;
     padding: 30px 0 15px 0;
     text-align: center;
     flex-shrink: 0;
     margin-top: auto;
-    position: relative; /* Necessario per z-index */
-    z-index: 5; /* Assicura che sia sopra tutto */
+    position: relative;
+    z-index: 5;
 }
-.footer .container {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 15px;
-}
+.footer .container { display: flex; flex-direction: column; align-items: center; gap: 15px; }
 .footer .footer-contact p { margin-bottom: 5px; font-size: 0.9em; }
-.footer .footer-contact i { margin-right: 8px; color: #50e3c2; } /* Mantenuto accento teal */
+.footer .footer-contact i { margin-right: 8px; color: #50e3c2; }
 .footer .footer-contact a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
 .footer .footer-contact a:hover { color: #fff; }
 .footer .social-links-footer a { color: #ccc; font-size: 1.4em; margin: 0 8px; transition: color 0.3s ease, transform 0.3s ease; }
 .footer .social-links-footer a:hover { color: #fff; transform: scale(1.1); }
-.footer .privacy-notice { font-size: 0.75em; margin-top: 10px; color: #aaa; max-width: 600px; line-height: 1.4; }
 .footer .copyright { font-size: 0.85em; margin-top: 10px; color: #aaa; }
+
 
 /* Responsive Design */
 @media (max-width: 992px) {
-    .container { max-width: 960px; }
-    .hero-text h1 { font-size: 2.5em; }
-    .hero-text h2 { font-size: 1.3em; }
-    .hero-text .intro { font-size: 1.05em; }
-    .scrolling-image { min-width: 300%; } /* Potrebbe servire aumentare per mantenere l'effetto */
-     @keyframes scrollHorizontal { /* Ricalcolare/aggiustare lo spostamento */
-       0% { transform: translateX(0%); }
-       100% { transform: translateX(calc(-100% + 50vw - 20px)); } /* Adattare al nuovo viewport width */
-       /* Alternativa semplice: */
-       /* 100% { transform: translateX(-60%); } */
-     }
+    .hero-section { background-size: 250% auto; /* Aumenta per compensare larghezza minore */ }
+    .hero-text h1 { font-size: 2.6em; }
+    .hero-text h2 { font-size: 1.4em; }
+    .hero-text .intro { font-size: 1.1em; max-width: 550px;}
 }
 
 @media (max-width: 768px) {
-    .container { max-width: 720px; }
-    .hero-section { min-height: auto; padding-bottom: 0; } /* Rimuove padding sotto per layout colonna */
-    .hero-split-container {
-        flex-direction: column; /* Colonne una sopra l'altra */
-        gap: 0; /* Rimuove spazio tra colonne */
+    .hero-section {
+        background-size: 300% auto; /* Ancora più largo per schermi medi */
+        min-height: 70vh;
+        padding: 50px 0;
     }
-    .hero-info {
-        flex-basis: auto; /* Occupa lo spazio necessario */
-        width: 100%;
-        padding: 40px 20px; /* Aumenta padding verticale */
-        order: 1; /* Info sotto l'immagine */
-    }
-    .hero-image-container {
-        flex-basis: auto;
-        width: 100%; /* Occupa tutta la larghezza */
-        height: 45vh; /* Altezza fissa per l'immagine su mobile */
-        max-height: 350px;
-        border-radius: 0; /* Rimuove bordi arrotondati */
-        order: 0; /* Immagine sopra le info */
-        box-shadow: none; /* Rimuove ombra su mobile */
-    }
-    .scrolling-image { min-width: 200%; /* Riduci se necessario */ }
-     @keyframes scrollHorizontal { /* Ricalcolare/aggiustare per larghezza piena */
-       0% { transform: translateX(0%); }
-       100% { transform: translateX(calc(-100% + 100vw)); }
-       /* Alternativa semplice: */
-       /* 100% { transform: translateX(-50%); } */
-     }
-
     .profile-pic { width: 130px; height: 130px; }
-    .hero-text h1 { font-size: 2.2em; }
-    .hero-text h2 { font-size: 1.2em; }
-    .hero-text .intro { font-size: 1em; }
+    .hero-text h1 { font-size: 2.3em; }
+    .hero-text h2 { font-size: 1.3em; }
+    .hero-text .intro { font-size: 1.05em; }
+    .link-button { padding: 10px 20px; font-size: 0.95em; }
+
+     /* Rallenta animazione sfondo su mobile se troppo pesante */
+     /* .hero-section { animation-duration: 80s; } */
 }
 
 @media (max-width: 480px) {
-     .container { max-width: 100%; padding: 0 15px; }
+     .hero-section {
+         background-size: 350% auto; /* Molto largo per schermi piccoli */
+         min-height: 65vh;
+         padding: 40px 0;
+         /* Opzionale: ferma animazione sfondo se dà problemi */
+         /* animation: none; background-position: 50% 50%; background-size: cover; */
+     }
      .profile-pic { width: 110px; height: 110px; }
-     .hero-text h1 { font-size: 1.9em; }
-     .hero-text h2 { font-size: 1.1em; }
-     .hero-text .intro { font-size: 0.95em; margin-bottom: 25px; }
-     .profile-links { gap: 10px; }
-     .link-button { padding: 9px 18px; font-size: 0.9em; }
-     .hero-image-container { height: 40vh; max-height: 300px; }
-     .scrolling-image { min-width: 220%; } /* Potrebbe servire aggiustare */
+     .hero-text h1 { font-size: 2em; }
+     .hero-text h2 { font-size: 1.15em; }
+     .hero-text .intro { font-size: 1em; margin-bottom: 30px;}
+     .profile-links { gap: 10px; flex-direction: column; align-items: center; }
+     .link-button { width: 80%; max-width: 300px; justify-content: center;}
 
-     /* Nascondere icone sfondo su schermi molto piccoli per performance/pulizia */
+     /* Nascondi icone sfondo su schermi molto piccoli */
      .background-icons { display: none; }
 }
