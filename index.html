@@ -15,6 +15,9 @@
 <body>
 
     <header class="hero-section">
+        <!-- Overlay blu semi-trasparente -->
+        <div class="hero-overlay"></div>
+
         <!-- Contenitore per le icone animate di sfondo -->
         <div class="background-icons">
             <i class="fab fa-linkedin"></i>
@@ -27,42 +30,35 @@
             <i class="fab fa-instagram"></i>
         </div>
 
-        <!-- Contenitore per il layout diviso -->
-        <div class="hero-split-container container">
-            <!-- Colonna Sinistra: Info e Link -->
-            <div class="hero-info">
-                <img src="https://raw.githubusercontent.com/masini-pro/portfolio/refs/heads/main/Selfie_round.png" alt="Foto Profilo Filippo Masini" class="profile-pic">
-                <div class="hero-text">
-                    <h1>Filippo Masini</h1>
-                    <h2>Area Manager | Interior Design Sector</h2>
-                    <p class="intro">
-                        Esperto nel settore dell'interior design con una forte visione internazionale. Connettiti con me attraverso i link qui sotto.
-                    </p>
-                </div>
-                <div class="profile-links">
-                    <a href="https://www.linkedin.com/in/fppmasini/" target="_blank" aria-label="LinkedIn" class="link-button linkedin">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="mailto:fpp.masini@gmail.com" aria-label="Email" class="link-button email">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                    <a href="https://www.instagram.com/masini.pro/" target="_blank" aria-label="Instagram Professionale" class="link-button instagram-pro">
-                        <i class="fab fa-instagram-square"></i> Instagram Pro
-                    </a>
-                     <a href="https://www.instagram.com/Fpp.masini/" target="_blank" aria-label="Instagram Privato" class="link-button instagram-pers">
-                        <i class="fab fa-instagram"></i> Instagram Personale
-                    </a>
-                    <a href="https://www.paypal.com/paypalme/fppmasini" target="_blank" aria-label="PayPal" class="link-button paypal">
-                        <i class="fab fa-paypal"></i> PayPal
-                    </a>
-                </div>
+        <!-- Contenitore per il contenuto principale (testo, foto, link) -->
+        <div class="container hero-content-container">
+            <img src="https://raw.githubusercontent.com/masini-pro/portfolio/refs/heads/main/Selfie_round.png" alt="Foto Profilo Filippo Masini" class="profile-pic">
+            <div class="hero-text">
+                <h1>Filippo Masini</h1>
+                <h2>Area Manager | Interior Design Sector</h2>
+                <p class="intro">
+                    Esperto nel settore dell'interior design con una forte visione internazionale. Connettiti con me attraverso i link qui sotto.
+                </p>
             </div>
+            <div class="profile-links">
+                <a href="https://www.linkedin.com/in/fppmasini/" target="_blank" aria-label="LinkedIn" class="link-button linkedin">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="mailto:fpp.masini@gmail.com" aria-label="Email" class="link-button email">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://www.instagram.com/masini.pro/" target="_blank" aria-label="Instagram Professionale" class="link-button instagram-pro">
+                    <i class="fab fa-instagram-square"></i> Instagram Pro
+                </a>
+                 <a href="https://www.instagram.com/Fpp.masini/" target="_blank" aria-label="Instagram Privato" class="link-button instagram-pers">
+                    <i class="fab fa-instagram"></i> Instagram Personale
+                </a>
+                <a href="https://www.paypal.com/paypalme/fppmasini" target="_blank" aria-label="PayPal" class="link-button paypal">
+                    <i class="fab fa-paypal"></i> PayPal
+                </a>
+            </div>
+        </div> <!-- Fine .hero-content-container -->
 
-            <!-- Colonna Destra: Immagine Scorrrevole -->
-            <div class="hero-image-container">
-                <img src="https://raw.githubusercontent.com/masini-pro/portfolio/refs/heads/main/modena.webp" alt="Veduta di Modena" class="scrolling-image">
-            </div>
-        </div>
     </header>
 
     <!-- Main content area (vuoto o per contenuti futuri) -->
@@ -82,12 +78,6 @@
                  <a href="https://www.instagram.com/Fpp.masini/" target="_blank" aria-label="Instagram Privato"><i class="fab fa-instagram"></i></a>
                  <a href="https://www.paypal.com/paypalme/fppmasini" target="_blank" aria-label="PayPal"><i class="fab fa-paypal"></i></a>
             </div>
-            <!-- Ho commentato la nota privacy, valuta se ti serve -->
-            <!--
-            <p class="privacy-notice">
-                Autorizzo il trattamento dei dati personali contenuti nel mio curriculum vitae in base all'art. 13 del D. Lgs. 196/2003 e all'art. 13 GDPR 679/16.
-            </p>
-             -->
             <p class="copyright">© <span id="current-year"></span> Filippo Masini. Tutti i diritti riservati.</p>
         </div>
     </footer>
