@@ -12,237 +12,305 @@ html {
 body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa; /* Sfondo leggermente grigio */
+    color: #333; /* Colore testo default per il main/footer */
+    background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Assicura che il footer stia in fondo */
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 960px;
+    max-width: 1140px; /* Aumentato per layout più largo */
     margin: 0 auto;
     padding: 0 20px;
+    position: relative; /* Necessario per z-index figli */
+    z-index: 2; /* Porta il contenuto sopra lo sfondo animato */
 }
 
-/* Hero Section (Sostituisce l'Header precedente) */
+/* Hero Section con nuovo sfondo e layout */
 .hero-section {
-    background: linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%);
-    color: #fff;
-    padding: 60px 0; /* Più padding per dare risalto */
-    text-align: center;
-    flex-shrink: 0; /* Impedisce alla section di restringersi */
+    background-color: #001546; /* Nuovo colore di sfondo */
+    color: #f8f9fa; /* Testo chiaro su sfondo scuro */
+    padding: 40px 0;
+    position: relative; /* Necessario per contenere elementi assoluti (icone bg) */
+    overflow: hidden; /* Nasconde parti di icone/immagini che escono */
+    display: flex; /* Centra il container verticalmente se necessario */
+    align-items: center; /* Centra verticalmente .hero-split-container */
+    min-height: 70vh; /* Altezza minima per dare spazio */
 }
 
-.hero-content {
+/* Layout diviso dentro Hero */
+.hero-split-container {
+    display: flex;
+    align-items: center; /* Allinea verticalmente le due colonne */
+    gap: 40px; /* Spazio tra le due colonne */
+    width: 100%;
+}
+
+.hero-info {
+    flex: 1 1 50%; /* Occupa circa il 50% dello spazio */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centra elementi info nella colonna */
+    text-align: center;
+    padding: 20px; /* Spazio interno */
+    z-index: 3; /* Assicura che sia sopra l'immagine se si sovrappongono */
 }
 
+.hero-image-container {
+    flex: 1 1 50%; /* Occupa circa il 50% dello spazio */
+    height: 60vh; /* Altezza definita per contenere l'immagine */
+    max-height: 500px; /* Limite altezza massima */
+    overflow: hidden; /* Cruciale per tagliare l'immagine */
+    position: relative; /* Per posizionare l'immagine */
+    border-radius: 10px; /* Bordo arrotondato (opzionale) */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Immagine Scorrevoole */
+.scrolling-image {
+    display: block;
+    height: 100%;
+    /* Larghezza molto maggiore del contenitore per permettere lo scroll */
+    width: auto;
+    min-width: 250%; /* Esempio: 2.5 volte la larghezza del contenitore */
+    position: absolute;
+    top: 0;
+    left: 0; /* Parte da sinistra */
+    object-fit: cover;
+    object-position: center center; /* Centra l'immagine verticalmente/orizzontalmente */
+    animation: scrollHorizontal 45s linear infinite alternate; /* Animazione */
+}
+
+@keyframes scrollHorizontal {
+    0% {
+        transform: translateX(0%); /* Start position */
+    }
+    100% {
+        /* Sposta l'immagine a sinistra fino a mostrare l'altra estremità */
+        /* Il valore negativo dipende da quanto l'immagine è più larga del contenitore */
+        /* Esempio: se min-width è 250%, l'immagine è 150% più larga. Sposta di -150% */
+        /* Calcolo più preciso: translateX(calc(-1 * ( (immagine_width / container_width) - 1) * 100% )) */
+        /* Con min-width 250%, sposta di circa -60% della *sua* larghezza */
+         transform: translateX(calc(-100% + 100vw / 2 - 20px)); /* Tentativo di calcolo più preciso, potrebbe richiedere aggiustamenti */
+         /* Alternativa più semplice ma meno precisa: */
+         /* transform: translateX(-50%); */ /* Sposta del 50% della larghezza dell'immagine */
+    }
+}
+
+
+/* Stili Info Utente */
 .profile-pic {
-    width: 160px; /* Leggermente più grande */
-    height: 160px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 6px solid rgba(255, 255, 255, 0.8);
-    margin-bottom: 25px;
+    border: 5px solid rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
     object-fit: cover;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .hero-text h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 3em; /* Più grande */
+    font-size: 2.8em;
     margin-bottom: 8px;
     font-weight: 700;
+    color: #FFF; /* Colore bianco per il titolo */
 }
 
 .hero-text h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.6em; /* Più grande */
-    margin-bottom: 20px;
+    font-size: 1.5em;
+    margin-bottom: 15px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.85); /* Leggermente trasparente */
 }
 
 .hero-text .intro {
-    font-size: 1.15em; /* Leggermente più grande */
-    max-width: 750px;
-    margin: 0 auto 35px auto; /* Più spazio sotto */
+    font-size: 1.1em;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
     line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-/* Stile dei Link Principali */
+/* Bottoni Link */
 .profile-links {
     display: flex;
-    flex-wrap: wrap; /* Permette ai bottoni di andare a capo su schermi piccoli */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 15px; /* Spazio tra i bottoni */
+    gap: 12px;
 }
 
 .link-button {
-    display: inline-flex; /* Allinea icona e testo */
+    display: inline-flex;
     align-items: center;
-    padding: 12px 25px;
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente */
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 25px; /* Bordi arrotondati */
+    padding: 10px 20px;
+    color: #001546; /* Testo scuro */
+    background-color: rgba(255, 255, 255, 0.9); /* Sfondo bianco quasi opaco */
+    border: 1px solid transparent;
+    border-radius: 25px;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .link-button i {
-    margin-right: 10px; /* Spazio tra icona e testo */
-    font-size: 1.2em; /* Dimensione icona nel bottone */
+    margin-right: 8px;
+    font-size: 1.1em;
 }
 
 .link-button:hover {
-    background-color: rgba(255, 255, 255, 0.35);
-    transform: translateY(-2px); /* Leggero sollevamento */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: #fff; /* Bianco pieno su hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Colori specifici (opzionale, per differenziare) */
-.link-button.linkedin { border-color: #0A66C2; }
-.link-button.email { border-color: #c71610; }
-.link-button.instagram-pro { border-color: #C13584; }
-.link-button.instagram-pers { border-color: #E1306C; }
-.link-button.paypal { border-color: #003087; }
+
+/* Icone Animate Sfondo */
+.background-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Sotto il contenuto ma sopra lo sfondo base */
+    pointer-events: none; /* Non interferisce con i click */
+}
+
+.background-icons i {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.06); /* Molto trasparenti! */
+    font-size: 40px; /* Dimensione base icone sfondo */
+    animation: floatRotate 25s linear infinite alternate;
+}
+
+/* Posizionamento e Ritardi Animazione Icone Sfondo */
+.background-icons i:nth-child(1) { top: 10%; left: 15%; font-size: 50px; animation-delay: -2s; animation-duration: 28s;}
+.background-icons i:nth-child(2) { top: 20%; left: 80%; font-size: 30px; animation-delay: -5s; }
+.background-icons i:nth-child(3) { top: 70%; left: 10%; font-size: 60px; animation-delay: -8s; animation-duration: 22s;}
+.background-icons i:nth-child(4) { top: 85%; left: 40%; font-size: 35px; animation-delay: -12s;}
+.background-icons i:nth-child(5) { top: 50%; left: 55%; font-size: 45px; animation-delay: -15s; animation-duration: 30s;}
+.background-icons i:nth-child(6) { top: 35%; left: 25%; font-size: 38px; animation-delay: -18s;}
+.background-icons i:nth-child(7) { top: 60%; left: 90%; font-size: 55px; animation-delay: -21s; animation-duration: 26s;}
+.background-icons i:nth-child(8) { top: 5%; left: 50%; font-size: 32px; animation-delay: -24s;}
+
+
+@keyframes floatRotate {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.06;
+    }
+    50% {
+         transform: translateY(-15px) rotate(180deg) scale(1.1);
+         opacity: 0.03; /* Ancora più tenue a metà */
+    }
+    100% {
+        transform: translateY(0px) rotate(360deg) scale(1);
+        opacity: 0.06;
+    }
+}
+
 
 /* Main Content Area */
 #main-content {
-    flex-grow: 1; /* Fa sì che il main occupi lo spazio rimanente */
+    flex-grow: 1;
     padding-top: 40px;
     padding-bottom: 40px;
+    background-color: #f8f9fa; /* Sfondo chiaro per il contenuto principale */
 }
 
 /* Footer */
 .footer {
-    background-color: #343a40;
+    background-color: #000d2e; /* Variazione più scura del blu */
     color: #ccc;
     padding: 30px 0 15px 0;
     text-align: center;
-    flex-shrink: 0; /* Impedisce al footer di restringersi */
-    margin-top: auto; /* Spinge il footer in fondo se il contenuto è poco */
+    flex-shrink: 0;
+    margin-top: auto;
+    position: relative; /* Necessario per z-index */
+    z-index: 5; /* Assicura che sia sopra tutto */
 }
-
 .footer .container {
      display: flex;
      flex-direction: column;
      align-items: center;
-     gap: 15px; /* Spazio tra gli elementi nel footer */
+     gap: 15px;
 }
-
-.footer .footer-contact p {
-    margin-bottom: 5px;
-    font-size: 0.9em;
-}
-.footer .footer-contact i {
-    margin-right: 8px;
-    color: #50e3c2;
-}
-.footer .footer-contact a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-.footer .footer-contact a:hover {
-    color: #fff;
-}
-
-.footer .social-links-footer a {
-    color: #ccc;
-    font-size: 1.4em; /* Icone più piccole nel footer */
-    margin: 0 8px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer .social-links-footer a:hover {
-    color: #fff;
-    transform: scale(1.1);
-}
-
-.footer .privacy-notice {
-    font-size: 0.75em; /* Più piccolo */
-    margin-top: 10px;
-    color: #aaa;
-    max-width: 600px;
-    line-height: 1.4;
-}
-
-.footer .copyright {
-    font-size: 0.85em;
-    margin-top: 10px;
-    color: #aaa;
-}
+.footer .footer-contact p { margin-bottom: 5px; font-size: 0.9em; }
+.footer .footer-contact i { margin-right: 8px; color: #50e3c2; } /* Mantenuto accento teal */
+.footer .footer-contact a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+.footer .footer-contact a:hover { color: #fff; }
+.footer .social-links-footer a { color: #ccc; font-size: 1.4em; margin: 0 8px; transition: color 0.3s ease, transform 0.3s ease; }
+.footer .social-links-footer a:hover { color: #fff; transform: scale(1.1); }
+.footer .privacy-notice { font-size: 0.75em; margin-top: 10px; color: #aaa; max-width: 600px; line-height: 1.4; }
+.footer .copyright { font-size: 0.85em; margin-top: 10px; color: #aaa; }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+    .container { max-width: 960px; }
+    .hero-text h1 { font-size: 2.5em; }
+    .hero-text h2 { font-size: 1.3em; }
+    .hero-text .intro { font-size: 1.05em; }
+    .scrolling-image { min-width: 300%; } /* Potrebbe servire aumentare per mantenere l'effetto */
+     @keyframes scrollHorizontal { /* Ricalcolare/aggiustare lo spostamento */
+       0% { transform: translateX(0%); }
+       100% { transform: translateX(calc(-100% + 50vw - 20px)); } /* Adattare al nuovo viewport width */
+       /* Alternativa semplice: */
+       /* 100% { transform: translateX(-60%); } */
+     }
+}
+
 @media (max-width: 768px) {
-    .hero-section {
-        padding: 40px 0;
+    .container { max-width: 720px; }
+    .hero-section { min-height: auto; padding-bottom: 0; } /* Rimuove padding sotto per layout colonna */
+    .hero-split-container {
+        flex-direction: column; /* Colonne una sopra l'altra */
+        gap: 0; /* Rimuove spazio tra colonne */
     }
-    .profile-pic {
-        width: 140px;
-        height: 140px;
+    .hero-info {
+        flex-basis: auto; /* Occupa lo spazio necessario */
+        width: 100%;
+        padding: 40px 20px; /* Aumenta padding verticale */
+        order: 1; /* Info sotto l'immagine */
     }
-    .hero-text h1 {
-        font-size: 2.5em;
+    .hero-image-container {
+        flex-basis: auto;
+        width: 100%; /* Occupa tutta la larghezza */
+        height: 45vh; /* Altezza fissa per l'immagine su mobile */
+        max-height: 350px;
+        border-radius: 0; /* Rimuove bordi arrotondati */
+        order: 0; /* Immagine sopra le info */
+        box-shadow: none; /* Rimuove ombra su mobile */
     }
-    .hero-text h2 {
-        font-size: 1.4em;
-    }
-     .hero-text .intro {
-        font-size: 1.05em;
-    }
-    .profile-links {
-        gap: 12px;
-    }
-    .link-button {
-        padding: 10px 20px;
-        font-size: 0.95em;
-    }
+    .scrolling-image { min-width: 200%; /* Riduci se necessario */ }
+     @keyframes scrollHorizontal { /* Ricalcolare/aggiustare per larghezza piena */
+       0% { transform: translateX(0%); }
+       100% { transform: translateX(calc(-100% + 100vw)); }
+       /* Alternativa semplice: */
+       /* 100% { transform: translateX(-50%); } */
+     }
+
+    .profile-pic { width: 130px; height: 130px; }
+    .hero-text h1 { font-size: 2.2em; }
+    .hero-text h2 { font-size: 1.2em; }
+    .hero-text .intro { font-size: 1em; }
 }
 
 @media (max-width: 480px) {
-     .hero-section {
-        padding: 30px 0;
-    }
-     .profile-pic {
-        width: 120px;
-        height: 120px;
-    }
-    .hero-text h1 {
-        font-size: 2em;
-    }
-    .hero-text h2 {
-        font-size: 1.2em;
-    }
-     .hero-text .intro {
-        font-size: 1em;
-        margin-bottom: 25px;
-    }
-     .profile-links {
-        gap: 10px;
-         flex-direction: column; /* Mette i bottoni in colonna su schermi molto piccoli */
-         align-items: center; /* Centra i bottoni in colonna */
-    }
-    .link-button {
-        padding: 10px 22px; /* Leggermente più larghi in colonna */
-        width: 80%; /* Occupa più larghezza in colonna */
-        justify-content: center; /* Centra testo e icona nel bottone */
-        max-width: 300px; /* Limite massimo larghezza bottone */
-    }
+     .container { max-width: 100%; padding: 0 15px; }
+     .profile-pic { width: 110px; height: 110px; }
+     .hero-text h1 { font-size: 1.9em; }
+     .hero-text h2 { font-size: 1.1em; }
+     .hero-text .intro { font-size: 0.95em; margin-bottom: 25px; }
+     .profile-links { gap: 10px; }
+     .link-button { padding: 9px 18px; font-size: 0.9em; }
+     .hero-image-container { height: 40vh; max-height: 300px; }
+     .scrolling-image { min-width: 220%; } /* Potrebbe servire aggiustare */
 
-     .footer .footer-contact p,
-     .footer .privacy-notice,
-     .footer .copyright {
-        font-size: 0.8em;
-     }
-     .footer .social-links-footer a {
-        font-size: 1.3em;
-    }
+     /* Nascondere icone sfondo su schermi molto piccoli per performance/pulizia */
+     .background-icons { display: none; }
 }
