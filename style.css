@@ -12,224 +12,231 @@ html {
 body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
-    color: #333; /* Colore testo default fuori dall'header/footer */
-    background-color: #f4f7f6; /* Sfondo leggermente diverso per il body */
+    color: #333;
+    background-color: #f4f7f6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Assicura che il footer stia in basso */
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 960px; /* Larghezza contenitore standard */
+    max-width: 960px;
     margin: 0 auto;
     padding: 0 20px;
     width: 100%;
 }
 
-/* Hero Section - Blocco Principale Superiore */
-.hero-section {
-    background-color: #001546; /* Colore sfondo blu scuro */
-    color: #f8f9fa; /* Testo chiaro */
-    padding: 50px 0; /* Spazio verticale interno */
+/* Hero Section - Contenitore Principale Superiore */
+.hero-section.with-animated-bg {
+    position: relative; /* Necessario per posizionare ::before e contenuto */
+    padding: 60px 0;
+    color: #f8f9fa;
+    min-height: 75vh; /* Altezza minima per dare spazio all'effetto */
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 60vh; /* Altezza minima */
-    text-align: center; /* Centra testo per default */
+    text-align: center;
+    overflow: hidden; /* Nasconde parti eccedenti */
+
+    /* === Sfondo Immagine Modena === */
+    background-image: url('https://raw.githubusercontent.com/masini-pro/portfolio/refs/heads/main/modena.webp');
+    background-color: #001546; /* Fallback */
+    /* === Modifica Chiave: background-size più grande e centrato === */
+    background-size: 220% auto; /* Immagine più larga per pan L/R */
+    background-position: 50% 50%; /* Parte dal centro */
+    background-repeat: no-repeat;
+    animation: panBackgroundCentered 60s linear infinite alternate;
 }
 
+/* Animazione Pan Orizzontale partendo dal centro */
+@keyframes panBackgroundCentered {
+    0% {
+        background-position: 50% 50%; /* Centro */
+    }
+    50% {
+        background-position: 0% 50%;   /* Pan view a destra (immagine va a sx) */
+    }
+    100% {
+        background-position: 100% 50%; /* Pan view a sinistra (immagine va a dx) */
+    }
+    /* L'alternate farà: centro -> sx(img) -> dx(img) -> sx(img) -> centro ... */
+}
+
+/* === Overlay con Gradiente Blu -> Trasparente === */
+.hero-section.with-animated-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradiente: blu (#001546) semi-trasparente in alto, sfuma a trasparente */
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 21, 70, 0.85) 0%,  /* Blu scuro semi-trasparente all'inizio */
+        rgba(0, 21, 70, 0.75) 30%, /* Leggermente meno opaco */
+        rgba(0, 21, 70, 0.3) 65%,  /* Più trasparente verso il basso */
+        rgba(0, 21, 70, 0) 100% /* Completamente trasparente alla fine */
+    );
+    z-index: 1; /* Sopra lo sfondo (z-index 0), sotto il contenuto (z-index 2) */
+    pointer-events: none; /* Non interferisce con i click */
+}
+
+/* Contenitore del Contenuto sopra lo sfondo/overlay */
 .hero-content-container {
+    position: relative; /* Necessario per z-index */
+    z-index: 2; /* Assicura che sia sopra lo sfondo e l'overlay */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra elementi verticalmente */
+    align-items: center;
 }
 
-/* Foto Profilo */
+/* Stili Foto Profilo, Testo e Link (come nella versione semplice) */
 .profile-pic {
-    width: 140px; /* Dimensione adeguata */
+    width: 140px;
     height: 140px;
     border-radius: 50%;
     border: 5px solid rgba(255, 255, 255, 0.8);
     margin-bottom: 25px;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-/* Testo nell'Header */
 .hero-text h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 2.5em; /* Dimensione titolo */
+    font-size: 2.6em;
     margin-bottom: 8px;
     font-weight: 700;
     color: #FFF;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Ombra per leggibilità */
 }
 
 .hero-text h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.3em; /* Dimensione sottotitolo */
+    font-size: 1.4em;
     margin-bottom: 15px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .hero-text .intro {
-    font-size: 1.1em; /* Dimensione testo introduttivo */
-    max-width: 600px; /* Limita larghezza testo */
+    font-size: 1.1em;
+    max-width: 600px;
     margin: 0 auto 30px auto;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
 }
 
-/* Link Buttons */
 .profile-links {
     display: flex;
-    flex-wrap: wrap; /* Permette ai bottoni di andare a capo */
-    justify-content: center; /* Centra i bottoni */
-    gap: 15px; /* Spazio tra i bottoni */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 .link-button {
     display: inline-flex;
     align-items: center;
-    padding: 10px 22px; /* Padding interno bottoni */
-    color: #001546; /* Colore testo bottone (scuro) */
-    background-color: #e9ecef; /* Colore sfondo bottone (grigio chiaro) */
+    padding: 10px 22px;
+    color: #001546;
+    background-color: rgba(255, 255, 255, 0.95); /* Sfondo quasi opaco per leggibilità */
     border: 1px solid transparent;
-    border-radius: 30px; /* Bordi molto arrotondati */
+    border-radius: 30px;
     text-decoration: none;
     font-size: 0.95em;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .link-button i {
-    margin-right: 8px; /* Spazio tra icona e testo */
+    margin-right: 8px;
     font-size: 1.1em;
 }
 
 .link-button:hover {
-    background-color: #f8f9fa; /* Sfondo più chiaro su hover */
-    transform: translateY(-2px); /* Leggero sollevamento */
+    background-color: #fff; /* Bianco pieno */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
-/* Main Content Area (lasciata vuota, occupa spazio rimanente) */
+
+/* Main Content Area */
 #main-content {
-    flex-grow: 1; /* Occupa lo spazio verticale disponibile */
-    /* Aggiungi padding se metterai contenuto qui */
-    /* padding: 40px 0; */
+    flex-grow: 1;
 }
 
-/* Footer */
+/* Footer (Stili invariati dalla versione semplice) */
 .footer {
-    background-color: #000d2e; /* Blu ancora più scuro per contrasto */
-    color: #adb5bd; /* Colore testo footer (grigio chiaro) */
-    padding: 25px 0 15px 0; /* Padding footer */
-    text-align: center; /* Centra testo nel footer */
-    flex-shrink: 0; /* Impedisce al footer di restringersi */
-    margin-top: auto; /* Spinge il footer in basso */
+    background-color: #000d2e;
+    color: #adb5bd;
+    padding: 25px 0 15px 0;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: auto;
+    position: relative;
+    z-index: 5; /* Sopra eventuale contenuto che scrolla */
 }
 
 .footer-content-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Spazio tra elementi footer */
+    gap: 15px;
 }
 
 .footer-contact p {
     margin-bottom: 5px;
     font-size: 0.95em;
-    display: inline-flex; /* Allinea icona e testo */
+    display: inline-flex;
     align-items: center;
-    margin-right: 15px; /* Spazio tra i contatti se sono sulla stessa riga */
+    margin-right: 15px;
 }
-.footer-contact p:last-child {
-    margin-right: 0;
-}
-
-.footer-contact i {
-    margin-right: 8px;
-    color: #6c757d; /* Colore icone contatto (grigio) */
-}
-
-.footer-contact a {
-    color: #adb5bd; /* Colore link email */
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-contact a:hover {
-    color: #f8f9fa; /* Link più chiaro su hover */
-}
-
-.social-links-footer a {
-    color: #adb5bd; /* Colore icone social */
-    font-size: 1.4em;
-    margin: 0 10px; /* Spazio tra icone social */
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-links-footer a:hover {
-    color: #f8f9fa; /* Icone più chiare su hover */
-    transform: scale(1.1); /* Leggero ingrandimento */
-}
-
-.copyright {
-    font-size: 0.85em;
-    margin-top: 10px; /* Spazio sopra il copyright */
-    color: #6c757d; /* Colore copyright (grigio) */
-}
-
+.footer-contact p:last-child { margin-right: 0; }
+.footer-contact i { margin-right: 8px; color: #6c757d; }
+.footer-contact a { color: #adb5bd; text-decoration: none; transition: color 0.3s ease; }
+.footer-contact a:hover { color: #f8f9fa; }
+.social-links-footer a { color: #adb5bd; font-size: 1.4em; margin: 0 10px; transition: color 0.3s ease, transform 0.3s ease; }
+.social-links-footer a:hover { color: #f8f9fa; transform: scale(1.1); }
+.copyright { font-size: 0.85em; margin-top: 10px; color: #6c757d; }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+    .hero-section.with-animated-bg { background-size: 260% auto; } /* Immagine più grande */
+    .hero-text h1 { font-size: 2.4em; }
+    .hero-text h2 { font-size: 1.3em; }
+}
+
 @media (max-width: 768px) {
-    .hero-section {
-        padding: 40px 0;
-        min-height: 50vh;
+    .hero-section.with-animated-bg {
+        background-size: 300% auto; /* Ancora più grande */
+        min-height: 70vh;
+        padding: 50px 0;
     }
-    .profile-pic {
-        width: 120px;
-        height: 120px;
-    }
+    .profile-pic { width: 120px; height: 120px; }
     .hero-text h1 { font-size: 2.2em; }
     .hero-text h2 { font-size: 1.2em; }
     .hero-text .intro { font-size: 1em; }
+    .link-button { padding: 10px 20px; font-size: 0.9em; }
 }
 
 @media (max-width: 480px) {
-    .hero-section {
-        padding: 30px 0;
-        min-height: auto; /* Altezza si adatta al contenuto */
+    .hero-section.with-animated-bg {
+        background-size: 350% auto; /* Molto grande per mobile */
+        min-height: auto; /* Adatta altezza al contenuto */
+        padding: 40px 0;
+        /* Opzionale: Ferma animazione se troppo pesante/distraente */
+        /* animation: none; background-position: 50% 30%; background-size: cover; */
     }
-    .profile-pic {
-        width: 100px;
-        height: 100px;
-    }
+    .profile-pic { width: 100px; height: 100px; }
     .hero-text h1 { font-size: 1.9em; }
     .hero-text h2 { font-size: 1.1em; }
-    .hero-text .intro { font-size: 0.95em; }
+    .hero-text .intro { font-size: 0.95em; margin-bottom: 30px;}
 
-    .profile-links {
-        flex-direction: column; /* Bottoni in colonna */
-        align-items: center; /* Centra i bottoni */
-        gap: 12px;
-    }
-    .link-button {
-        width: 85%; /* Larghezza bottoni su mobile */
-        max-width: 320px; /* Larghezza massima */
-        justify-content: center; /* Centra testo/icona nel bottone */
-        padding: 12px 15px; /* Adegua padding */
-    }
+    .profile-links { flex-direction: column; align-items: center; gap: 12px; }
+    .link-button { width: 85%; max-width: 320px; justify-content: center; padding: 12px 15px;}
 
-    .footer-contact {
-         display: flex;
-         flex-direction: column; /* Contatti in colonna */
-         align-items: center;
-         gap: 8px;
-    }
-     .footer-contact p {
-        margin-right: 0; /* Rimuovi margine laterale */
-    }
-    .social-links-footer a { margin: 0 8px; }
+    .footer-contact { flex-direction: column; gap: 8px; }
+    .footer-contact p { margin-right: 0; }
 }
