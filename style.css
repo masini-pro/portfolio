@@ -13,7 +13,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f7f6;
+    background-color: #f4f7f6; /* Mantenuto per eventuale spazio sotto footer */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -31,18 +31,17 @@ body {
     position: relative; /* Necessario per posizionare ::before e contenuto */
     padding: 60px 0;
     color: #f8f9fa;
-    min-height: 75vh; /* Altezza minima per dare spazio all'effetto */
+    /* === Modifica Chiave: Altezza minima aumentata per coprire più spazio === */
+    min-height: 90vh; /* Aumentata per ridurre/eliminare spazio bianco sotto */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     overflow: hidden; /* Nasconde parti eccedenti */
 
-    /* === Sfondo Immagine Modena === */
     background-image: url('https://raw.githubusercontent.com/masini-pro/portfolio/refs/heads/main/modena.webp');
     background-color: #001546; /* Fallback */
-    /* === Modifica Chiave: background-size più grande e centrato === */
-    background-size: 220% auto; /* Immagine più larga per pan L/R */
+    background-size: 220% auto;
     background-position: 50% 50%; /* Parte dal centro */
     background-repeat: no-repeat;
     animation: panBackgroundCentered 60s linear infinite alternate;
@@ -50,19 +49,12 @@ body {
 
 /* Animazione Pan Orizzontale partendo dal centro */
 @keyframes panBackgroundCentered {
-    0% {
-        background-position: 50% 50%; /* Centro */
-    }
-    50% {
-        background-position: 0% 50%;   /* Pan view a destra (immagine va a sx) */
-    }
-    100% {
-        background-position: 100% 50%; /* Pan view a sinistra (immagine va a dx) */
-    }
-    /* L'alternate farà: centro -> sx(img) -> dx(img) -> sx(img) -> centro ... */
+    0% { background-position: 50% 50%; }
+    50% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
-/* === Overlay con Gradiente Blu -> Trasparente === */
+/* Overlay con Gradiente Blu -> Trasparente */
 .hero-section.with-animated-bg::before {
     content: '';
     position: absolute;
@@ -70,28 +62,27 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Gradiente: blu (#001546) semi-trasparente in alto, sfuma a trasparente */
     background: linear-gradient(
         to bottom,
-        rgba(0, 21, 70, 0.85) 0%,  /* Blu scuro semi-trasparente all'inizio */
-        rgba(0, 21, 70, 0.75) 30%, /* Leggermente meno opaco */
-        rgba(0, 21, 70, 0.3) 65%,  /* Più trasparente verso il basso */
-        rgba(0, 21, 70, 0) 100% /* Completamente trasparente alla fine */
+        rgba(0, 21, 70, 0.85) 0%,
+        rgba(0, 21, 70, 0.75) 30%,
+        rgba(0, 21, 70, 0.3) 65%,
+        rgba(0, 21, 70, 0) 100%
     );
-    z-index: 1; /* Sopra lo sfondo (z-index 0), sotto il contenuto (z-index 2) */
-    pointer-events: none; /* Non interferisce con i click */
+    z-index: 1;
+    pointer-events: none;
 }
 
 /* Contenitore del Contenuto sopra lo sfondo/overlay */
 .hero-content-container {
-    position: relative; /* Necessario per z-index */
-    z-index: 2; /* Assicura che sia sopra lo sfondo e l'overlay */
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Stili Foto Profilo, Testo e Link (come nella versione semplice) */
+/* Stili Foto Profilo, Testo e Link */
 .profile-pic {
     width: 140px;
     height: 140px;
@@ -108,12 +99,13 @@ body {
     margin-bottom: 8px;
     font-weight: 700;
     color: #FFF;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Ombra per leggibilità */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
+/* Stile per il nuovo h2 più corto */
 .hero-text h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.4em;
+    font-size: 1.4em; /* Puoi aggiustare se necessario */
     margin-bottom: 15px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
@@ -140,7 +132,7 @@ body {
     align-items: center;
     padding: 10px 22px;
     color: #001546;
-    background-color: rgba(255, 255, 255, 0.95); /* Sfondo quasi opaco per leggibilità */
+    background-color: rgba(255, 255, 255, 0.95);
     border: 1px solid transparent;
     border-radius: 30px;
     text-decoration: none;
@@ -156,7 +148,7 @@ body {
 }
 
 .link-button:hover {
-    background-color: #fff; /* Bianco pieno */
+    background-color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
@@ -164,19 +156,22 @@ body {
 
 /* Main Content Area */
 #main-content {
-    flex-grow: 1;
+    flex-grow: 1; /* Occupa spazio verticale rimanente */
+    /* Se aggiungi contenuto qui, potresti voler dare un background: */
+    /* background-color: #fff; */
+    /* padding: 40px 0; */
 }
 
-/* Footer (Stili invariati dalla versione semplice) */
+/* Footer */
 .footer {
     background-color: #000d2e;
     color: #adb5bd;
     padding: 25px 0 15px 0;
     text-align: center;
-    flex-shrink: 0;
-    margin-top: auto;
+    flex-shrink: 0; /* Non si restringe */
+    /* margin-top: auto; NON necessario con flex-grow su main */
     position: relative;
-    z-index: 5; /* Sopra eventuale contenuto che scrolla */
+    z-index: 5;
 }
 
 .footer-content-container {
@@ -186,13 +181,7 @@ body {
     gap: 15px;
 }
 
-.footer-contact p {
-    margin-bottom: 5px;
-    font-size: 0.95em;
-    display: inline-flex;
-    align-items: center;
-    margin-right: 15px;
-}
+.footer-contact p { margin-bottom: 5px; font-size: 0.95em; display: inline-flex; align-items: center; margin-right: 15px; }
 .footer-contact p:last-child { margin-right: 0; }
 .footer-contact i { margin-right: 8px; color: #6c757d; }
 .footer-contact a { color: #adb5bd; text-decoration: none; transition: color 0.3s ease; }
@@ -203,15 +192,15 @@ body {
 
 /* Responsive Design */
 @media (max-width: 992px) {
-    .hero-section.with-animated-bg { background-size: 260% auto; } /* Immagine più grande */
+    .hero-section.with-animated-bg { background-size: 260% auto; min-height: 88vh; }
     .hero-text h1 { font-size: 2.4em; }
     .hero-text h2 { font-size: 1.3em; }
 }
 
 @media (max-width: 768px) {
     .hero-section.with-animated-bg {
-        background-size: 300% auto; /* Ancora più grande */
-        min-height: 70vh;
+        background-size: 300% auto;
+        min-height: 85vh; /* Aumentata anche qui */
         padding: 50px 0;
     }
     .profile-pic { width: 120px; height: 120px; }
@@ -223,15 +212,13 @@ body {
 
 @media (max-width: 480px) {
     .hero-section.with-animated-bg {
-        background-size: 350% auto; /* Molto grande per mobile */
-        min-height: auto; /* Adatta altezza al contenuto */
-        padding: 40px 0;
-        /* Opzionale: Ferma animazione se troppo pesante/distraente */
-        /* animation: none; background-position: 50% 30%; background-size: cover; */
+        background-size: 350% auto;
+        min-height: auto; /* Ritorna ad auto su mobile per adattarsi al contenuto */
+        padding: 40px 0 50px 0; /* Aggiunto padding sotto per distanziare i bottoni dal bordo */
     }
     .profile-pic { width: 100px; height: 100px; }
     .hero-text h1 { font-size: 1.9em; }
-    .hero-text h2 { font-size: 1.1em; }
+    .hero-text h2 { font-size: 1.1em; } /* Stile h2 aggiornato */
     .hero-text .intro { font-size: 0.95em; margin-bottom: 30px;}
 
     .profile-links { flex-direction: column; align-items: center; gap: 12px; }
