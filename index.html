@@ -15,22 +15,6 @@
 <body>
 
     <header class="hero-section">
-        <!-- Overlay blu semi-trasparente -->
-        <div class="hero-overlay"></div>
-
-        <!-- Contenitore per le icone animate di sfondo -->
-        <div class="background-icons">
-            <i class="fab fa-linkedin"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-paypal"></i>
-            <i class="fab fa-linkedin"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-paypal"></i>
-            <i class="fab fa-linkedin"></i>
-            <i class="fab fa-instagram"></i>
-        </div>
-
-        <!-- Contenitore per il contenuto principale (testo, foto, link) -->
         <div class="container hero-content-container">
             <img src="https://raw.githubusercontent.com/masini-pro/portfolio/refs/heads/main/Selfie_round.png" alt="Foto Profilo Filippo Masini" class="profile-pic">
             <div class="hero-text">
@@ -58,16 +42,15 @@
                 </a>
             </div>
         </div> <!-- Fine .hero-content-container -->
-
     </header>
 
-    <!-- Main content area (vuoto o per contenuti futuri) -->
-    <main class="container" id="main-content">
-        <!-- Eventuali contenuti aggiuntivi -->
+    <!-- Main content area (lasciata vuota per semplicità) -->
+    <main id="main-content">
+        <!-- Qui potresti aggiungere contenuti futuri se necessario -->
     </main>
 
     <footer class="footer">
-        <div class="container">
+        <div class="container footer-content-container">
              <div class="footer-contact">
                 <p><i class="fas fa-map-marker-alt"></i> Emilia Romagna, Italia</p>
                 <p><i class="fas fa-envelope"></i> <a href="mailto:fpp.masini@gmail.com">fpp.masini@gmail.com</a></p>
@@ -83,6 +66,7 @@
     </footer>
 
     <script>
+        // Script semplice per aggiornare l'anno nel copyright
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 
