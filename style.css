@@ -6,7 +6,7 @@
 }
 
 html {
-    scroll-behavior: smooth; /* Scroll morbido per eventuali link interni */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -14,6 +14,9 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa; /* Sfondo leggermente grigio */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Assicura che il footer stia in fondo */
 }
 
 .container {
@@ -22,216 +25,139 @@ body {
     padding: 0 20px;
 }
 
-/* Header */
-.header {
-    background: linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%); /* Gradient moderno */
+/* Hero Section (Sostituisce l'Header precedente) */
+.hero-section {
+    background: linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%);
     color: #fff;
-    padding: 40px 0;
+    padding: 60px 0; /* Più padding per dare risalto */
     text-align: center;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+    flex-shrink: 0; /* Impedisce alla section di restringersi */
 }
 
-.header-content {
+.hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* Rende l'immagine circolare */
-    border: 5px solid rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
-    object-fit: cover; /* Assicura che l'immagine copra lo spazio senza distorsioni */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 160px; /* Leggermente più grande */
+    height: 160px;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.header-text h1 {
+.hero-text h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 2.8em;
-    margin-bottom: 5px;
+    font-size: 3em; /* Più grande */
+    margin-bottom: 8px;
     font-weight: 700;
 }
 
-.header-text h2 {
+.hero-text h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.5em;
-    margin-bottom: 15px;
+    font-size: 1.6em; /* Più grande */
+    margin-bottom: 20px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
 }
 
-.header-text .intro {
-    font-size: 1.1em;
-    max-width: 700px; /* Limita la larghezza del testo intro */
-    margin: 0 auto 25px auto;
+.hero-text .intro {
+    font-size: 1.15em; /* Leggermente più grande */
+    max-width: 750px;
+    margin: 0 auto 35px auto; /* Più spazio sotto */
     line-height: 1.7;
 }
 
-.contact-icons {
+/* Stile dei Link Principali */
+.profile-links {
     display: flex;
+    flex-wrap: wrap; /* Permette ai bottoni di andare a capo su schermi piccoli */
     justify-content: center;
-    gap: 20px; /* Spazio tra le icone */
+    gap: 15px; /* Spazio tra i bottoni */
 }
 
-.contact-icons a {
+.link-button {
+    display: inline-flex; /* Allinea icona e testo */
+    align-items: center;
+    padding: 12px 25px;
     color: #fff;
-    font-size: 1.8em; /* Dimensione icone */
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.contact-icons a:hover {
-    color: #e0e0e0; /* Leggero cambio colore al passaggio del mouse */
-    transform: scale(1.1); /* Leggero ingrandimento */
-}
-
-/* Sezioni Main */
-main section {
-    background-color: #fff;
-    padding: 30px;
-    margin-bottom: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-main h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8em;
-    color: #4a90e2; /* Colore primario per i titoli di sezione */
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #50e3c2; /* Sottolineatura con colore secondario */
-    display: inline-block; /* Per far funzionare il border-bottom correttamente */
-}
-
-/* Esperienza Lavorativa */
-#experience .job {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #eee; /* Separatore leggero tra i lavori */
-}
-#experience .job:last-child {
-    border-bottom: none; /* Rimuove il separatore dall'ultimo elemento */
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-#experience h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.3em;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-#experience h4 {
+    background-color: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px; /* Bordi arrotondati */
+    text-decoration: none;
     font-size: 1em;
-    color: #555;
-    margin-bottom: 5px;
     font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#experience .date {
-    font-size: 0.9em;
-    color: #777;
-    margin-bottom: 15px;
-    font-style: italic;
+.link-button i {
+    margin-right: 10px; /* Spazio tra icona e testo */
+    font-size: 1.2em; /* Dimensione icona nel bottone */
 }
 
-#experience ul,
-#competencies ul,
-#languages ul {
-    list-style: none; /* Rimuove i punti elenco default */
-    padding-left: 0;
+.link-button:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px); /* Leggero sollevamento */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-#experience ul li,
-#competencies ul li,
-#languages ul li {
-    margin-bottom: 10px;
-    padding-left: 20px; /* Spazio per l'icona/bullet personalizzato */
-    position: relative;
-}
+/* Colori specifici (opzionale, per differenziare) */
+.link-button.linkedin { border-color: #0A66C2; }
+.link-button.email { border-color: #c71610; }
+.link-button.instagram-pro { border-color: #C13584; }
+.link-button.instagram-pers { border-color: #E1306C; }
+.link-button.paypal { border-color: #003087; }
 
-#experience ul li::before,
-#competencies ul li::before,
-#languages ul li::before {
-    content: '\25CF'; /* Bullet point circolare */
-    color: #50e3c2; /* Colore secondario per i bullet */
-    font-size: 1.1em;
-    position: absolute;
-    left: 0;
-    top: 1px; /* Allineamento verticale */
-}
-
-/* Istruzione */
-#education .education-item {
-    margin-bottom: 15px;
-}
-#education h3 {
-     font-family: 'Montserrat', sans-serif;
-    font-size: 1.2em;
-    color: #333;
-    margin-bottom: 3px;
-}
-#education h4 {
-    font-size: 1em;
-    color: #555;
-    margin-bottom: 3px;
-     font-weight: 600;
-}
-#education .date {
-    font-size: 0.9em;
-    color: #777;
-    font-style: italic;
-}
-
-
-/* Lingue */
-#languages strong {
-    color: #444;
+/* Main Content Area */
+#main-content {
+    flex-grow: 1; /* Fa sì che il main occupi lo spazio rimanente */
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 /* Footer */
 .footer {
-    background-color: #343a40; /* Sfondo scuro per il footer */
+    background-color: #343a40;
     color: #ccc;
-    padding: 40px 0 20px 0;
+    padding: 30px 0 15px 0;
     text-align: center;
-    margin-top: 40px;
+    flex-shrink: 0; /* Impedisce al footer di restringersi */
+    margin-top: auto; /* Spinge il footer in fondo se il contenuto è poco */
 }
 
 .footer .container {
      display: flex;
      flex-direction: column;
      align-items: center;
-     gap: 20px; /* Spazio tra gli elementi nel footer */
+     gap: 15px; /* Spazio tra gli elementi nel footer */
 }
 
-.footer .contact-info-footer p {
-    margin-bottom: 8px;
-    font-size: 0.95em;
+.footer .footer-contact p {
+    margin-bottom: 5px;
+    font-size: 0.9em;
 }
-.footer .contact-info-footer i {
+.footer .footer-contact i {
     margin-right: 8px;
-    color: #50e3c2; /* Icone con colore secondario */
+    color: #50e3c2;
 }
-.footer .contact-info-footer a {
+.footer .footer-contact a {
     color: #ccc;
     text-decoration: none;
     transition: color 0.3s ease;
 }
-.footer .contact-info-footer a:hover {
+.footer .footer-contact a:hover {
     color: #fff;
 }
 
 .footer .social-links-footer a {
     color: #ccc;
-    font-size: 1.6em;
-    margin: 0 10px;
+    font-size: 1.4em; /* Icone più piccole nel footer */
+    margin: 0 8px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -241,96 +167,82 @@ main h2 {
 }
 
 .footer .privacy-notice {
-    font-size: 0.8em;
-    margin-top: 15px;
+    font-size: 0.75em; /* Più piccolo */
+    margin-top: 10px;
     color: #aaa;
     max-width: 600px;
     line-height: 1.4;
 }
 
 .footer .copyright {
-    font-size: 0.9em;
-    margin-top: 15px;
+    font-size: 0.85em;
+    margin-top: 10px;
     color: #aaa;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        text-align: center;
+    .hero-section {
+        padding: 40px 0;
     }
-
-    .header-text h1 {
-        font-size: 2.2em;
+    .profile-pic {
+        width: 140px;
+        height: 140px;
     }
-    .header-text h2 {
-        font-size: 1.3em;
+    .hero-text h1 {
+        font-size: 2.5em;
     }
-     .header-text .intro {
-        font-size: 1em;
+    .hero-text h2 {
+        font-size: 1.4em;
     }
-
-    .contact-icons a {
-        font-size: 1.6em;
+     .hero-text .intro {
+        font-size: 1.05em;
     }
-
-    main h2 {
-        font-size: 1.6em;
+    .profile-links {
+        gap: 12px;
     }
-
-    #experience h3 {
-        font-size: 1.2em;
-    }
-
-    .footer .container {
-        gap: 15px;
-    }
-     .footer .contact-info-footer p {
-        font-size: 0.9em;
-    }
-    .footer .social-links-footer a {
-        font-size: 1.5em;
+    .link-button {
+        padding: 10px 20px;
+        font-size: 0.95em;
     }
 }
 
 @media (max-width: 480px) {
-     .header {
+     .hero-section {
         padding: 30px 0;
     }
      .profile-pic {
         width: 120px;
         height: 120px;
     }
-    .header-text h1 {
-        font-size: 1.8em;
+    .hero-text h1 {
+        font-size: 2em;
     }
-    .header-text h2 {
-        font-size: 1.1em;
+    .hero-text h2 {
+        font-size: 1.2em;
     }
-     .header-text .intro {
-        font-size: 0.95em;
+     .hero-text .intro {
+        font-size: 1em;
+        margin-bottom: 25px;
     }
-    .contact-icons a {
-        font-size: 1.5em;
-        gap: 15px;
+     .profile-links {
+        gap: 10px;
+         flex-direction: column; /* Mette i bottoni in colonna su schermi molto piccoli */
+         align-items: center; /* Centra i bottoni in colonna */
     }
-     main section {
-        padding: 20px;
+    .link-button {
+        padding: 10px 22px; /* Leggermente più larghi in colonna */
+        width: 80%; /* Occupa più larghezza in colonna */
+        justify-content: center; /* Centra testo e icona nel bottone */
+        max-width: 300px; /* Limite massimo larghezza bottone */
     }
-    main h2 {
-        font-size: 1.4em;
-    }
-     #experience h3 {
-        font-size: 1.1em;
-    }
-     .footer .contact-info-footer p,
+
+     .footer .footer-contact p,
      .footer .privacy-notice,
      .footer .copyright {
-        font-size: 0.85em;
+        font-size: 0.8em;
      }
      .footer .social-links-footer a {
-        font-size: 1.4em;
-        margin: 0 8px;
+        font-size: 1.3em;
     }
 }
